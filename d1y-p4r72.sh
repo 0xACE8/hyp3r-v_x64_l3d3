@@ -11,7 +11,7 @@ sed -i 's/192.168.1.1/192.168.177.80/g' package/base-files/files/bin/config_gene
 sed -i 's/root:::0:99999:7:::/root:$1$4xKZB45Q$w0CPT5M6vBWbYNmSWuxfU.:0:0:99999:7:::/g' package/base-files/files/etc/shadow
 
 # Change language=auto to zh_cn
-sed -i 's/lang="auto"/lang="zh_cn"/g' package/emortal/default-settings/files/99-default-settings
+# sed -i 's/lang="auto"/lang="zh_cn"/g' package/emortal/default-settings/files/99-default-settings
 
 # Change ash to bash
 sed -i 's/ash/bash/g' package/base-files/files/etc/passwd
@@ -52,11 +52,11 @@ echo 'net.core.wmem_default=26214400' >>package/base-files/files/etc/sysctl.d/10
 echo 'net.core.netdev_max_backlog=2048' >>package/base-files/files/etc/sysctl.d/10-default.conf
 
 # upgrade 99-default-settings-chinese.sh
-rm -rf package/emortal/default-settings/files/99-default-settings-chinese.sh
-wget --no-check-certificate https://raw.githubusercontent.com/0xACE8/hyp3r-v_x64_u3f1/main/99-default-settings-chinese.sh -O package/emortal/default-settings/files/99-default-settings-chinese.sh
+# rm -rf package/emortal/default-settings/files/99-default-settings-chinese.sh
+# wget --no-check-certificate https://raw.githubusercontent.com/0xACE8/hyp3r-v_x64_u3f1/main/99-default-settings-chinese.sh -O package/emortal/default-settings/files/99-default-settings-chinese.sh
 
 # add init settings
-wget --no-check-certificate https://raw.githubusercontent.com/0xACE8/hyp3r-v_x64_u3f1/main/99-init-settings -O package/base-files/files/etc/uci-defaults/99-init-settings
+# wget --no-check-certificate https://raw.githubusercontent.com/0xACE8/hyp3r-v_x64_u3f1/main/99-init-settings -O package/base-files/files/etc/uci-defaults/99-init-settings
 
 # Change to my banner
 sudo rm package/base-files/files/etc/banner
