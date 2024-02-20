@@ -6,14 +6,14 @@ uci commit luci
 
 # argon
 uci batch <<EOF
-set argon.@global[0].primary='#1c78ff'
-set argon.@global[0].dark_primary='#1c78ff'
-set argon.@global[0].blur='10'
-set argon.@global[0].blur_dark='10'
-set argon.@global[0].transparency='0.5'
-set argon.@global[0].transparency_dark='0.5'
-set argon.@global[0].mode='normal'
-set argon.@global[0].online_wallpaper='none'
+set argone.@global[0].primary='#1c78ff'
+set argone.@global[0].dark_primary='#1c78ff'
+set argone.@global[0].blur='10'
+set argone.@global[0].blur_dark='10'
+set argone.@global[0].transparency='0.5'
+set argone.@global[0].transparency_dark='0.5'
+set argone.@global[0].mode='normal'
+set argone.@global[0].online_wallpaper='none'
 EOF
 uci commit argon
 
@@ -32,13 +32,13 @@ uci commit argon
 
 
 # netspeedtest homebox is on
-uci set netspeedtest.homebox.enabled='1'
-uci set netspeedtest.speedtestiperf3.enabled='1'
-uci commit netspeedtest
+# uci set netspeedtest.homebox.enabled='1'
+# uci set netspeedtest.speedtestiperf3.enabled='1'
+# uci commit netspeedtest
 
 # system
 uci batch <<EOF
-set system.@system[0].hostname='Bypass.Router'
+set system.@system[0].hostname='LedeWrt'
 set system.@system[0].timezone='PST8PDT,M3.2.0,M11.1.0'
 set system.@system[0].zonename='America/Los Angeles'
 delete system.ntp.enable_server
@@ -110,25 +110,26 @@ set network.lan6.proto='dhcpv6'
 set network.lan6.device='@lan'
 set network.lan6.reqaddress='try'
 set network.lan6.reqprefix='auto'
-set network.lan2=interface
-set network.lan2.proto='static'
-set network.lan2.device='br-lan'
-set network.lan2.ipaddr='192.168.177.81'
-set network.lan2.netmask='255.255.255.0'
-set network.lan2.gateway='192.168.177.1'
-set network.lan2.metric='1'
-set network.lan2.dns='127.0.0.1'
-set network.lan3=interface
-set network.lan3.proto='static'
-set network.lan3.device='br-lan'
-set network.lan3.ipaddr='192.168.177.82'
-set network.lan3.netmask='255.255.255.0'
-set network.lan3.gateway='192.168.177.1'
-set network.lan3.dns='127.0.0.1'
-set network.lan3.metric='2'
 EOF
 uci commit network
 /etc/init.d/network restart
+
+# set network.lan2=interface
+# set network.lan2.proto='static'
+# set network.lan2.device='br-lan'
+# set network.lan2.ipaddr='192.168.177.81'
+# set network.lan2.netmask='255.255.255.0'
+# set network.lan2.gateway='192.168.177.1'
+# set network.lan2.metric='1'
+# set network.lan2.dns='127.0.0.1'
+# set network.lan3=interface
+# set network.lan3.proto='static'
+# set network.lan3.device='br-lan'
+# set network.lan3.ipaddr='192.168.177.82'
+# set network.lan3.netmask='255.255.255.0'
+# set network.lan3.gateway='192.168.177.1'
+# set network.lan3.dns='127.0.0.1'
+# set network.lan3.metric='2'
 
 # dnscrypt-proxy2 setting
 sed -i 's/START=18/START=99/g' /etc/init.d/dnscrypt-proxy
@@ -142,6 +143,8 @@ sed -i 's/127.0.0.1:8888/127.0.0.1:1101/g' /etc/dnscrypt-proxy2/dnscrypt-proxy.t
 #sed -i 's/# proxy/proxy/g' /etc/dnscrypt-proxy2/dnscrypt-proxy.toml
 #sed -i 's/# http_proxy/http_proxy/g' /etc/dnscrypt-proxy2/dnscrypt-proxy.toml
 #sed -i 's/# blocked_names_file/blocked_names_file/g' /etc/dnscrypt-proxy2/dnscrypt-proxy.toml
+/etc/init.d/dnscrypt-proxy disable
+/etc/init.d/dnscrypt-proxy stop
 
 # crontabs
 echo '* 4 * * 1  wget --no-check-certificate -O /etc/dnsmasq.d/accelerated-domains.china.conf "https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/accelerated-domains.china.conf"' >> /etc/crontabs/root
