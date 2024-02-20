@@ -41,6 +41,7 @@ uci batch <<EOF
 set system.@system[0].hostname='LedeWrt'
 set system.@system[0].timezone='PST8PDT,M3.2.0,M11.1.0'
 set system.@system[0].zonename='America/Los Angeles'
+system.@system[0].zram_comp_algo='zstd'
 delete system.ntp.enable_server
 delete system.ntp.server
 add_list system.ntp.server="cn.ntp.org.cn"
