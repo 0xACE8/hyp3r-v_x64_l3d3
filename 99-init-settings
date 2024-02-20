@@ -4,7 +4,7 @@
 uci set luci.main.lang=zh_cn
 uci commit luci
 
-# argon
+# argone
 uci batch <<EOF
 set argone.@global[0].primary='#1c78ff'
 set argone.@global[0].dark_primary='#1c78ff'
@@ -23,13 +23,13 @@ uci commit argon
 #uci commit ttyd
 
 # turboacc
-#uci batch <<EOF
-#set turboacc.config.bbr_cca='1'
+uci batch <<EOF
+set turboacc.config.bbr_cca='1'
+EOF
+uci commit turboacc
+/etc/init.d/turboacc restart
 #set turboacc.config.fullcone6='0'
 #set turboacc.config.hw_wed='0'
-#EOF
-#uci commit turboacc
-
 
 # netspeedtest homebox is on
 # uci set netspeedtest.homebox.enabled='1'
@@ -42,6 +42,7 @@ set system.@system[0].hostname='LedeWrt'
 set system.@system[0].timezone='PST8PDT,M3.2.0,M11.1.0'
 set system.@system[0].zonename='America/Los Angeles'
 delete system.ntp.enable_server
+delete system.ntp.server
 add_list system.ntp.server="cn.ntp.org.cn"
 add_list system.ntp.server="edu.ntp.org.cn"
 add_list system.ntp.server="ntp.ntsc.ac.cn"
@@ -83,7 +84,7 @@ delete dhcp.@dnsmasq[0].filter_a
 set dhcp.@dnsmasq[0].nonegcache='1'
 set dhcp.@dnsmasq[0].cachesize='10000'
 set dhcp.@dnsmasq[0].filter_aaaa='1'
-set dhcp.@dnsmasq[0].server='127.0.0.1#5335'
+set dhcp.@dnsmasq[0].server='192.168.177.77#5335'
 set dhcp.@dnsmasq[0].noresolv='1'
 set dhcp.@dnsmasq[0].nohosts='1'
 set dhcp.@dnsmasq[0].serversfile='/etc/dnsmasq.d/accelerated-domains.china.conf'
@@ -104,12 +105,13 @@ delete network.lan.ip6assign
 delete network.globals.ula_prefix
 set network.globals.packet_steering='1'
 set network.lan.gateway='192.168.177.1'
-set network.lan.dns='127.0.0.1'
+set network.lan.dns='192.168.177.77'
 set network.lan6=interface
 set network.lan6.proto='dhcpv6'
 set network.lan6.device='@lan'
 set network.lan6.reqaddress='try'
 set network.lan6.reqprefix='auto'
+set network.lan6.ifname='@lan'
 EOF
 uci commit network
 /etc/init.d/network restart
