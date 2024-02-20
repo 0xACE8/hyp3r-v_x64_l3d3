@@ -13,6 +13,15 @@ sed -i 's/root:::0:99999:7:::/root:$1$4xKZB45Q$w0CPT5M6vBWbYNmSWuxfU.:0:0:99999:
 # Change language=auto to zh_cn
 # sed -i 's/lang="auto"/lang="zh_cn"/g' package/emortal/default-settings/files/99-default-settings
 
+#. Modify Hostname
+sed -i '/uci commit system/i\uci set system.@system[0].hostname='LedeWrt'' package/lean/default-settings/files/zzz-default-settings
+
+#. Modify builder
+sed -i "s/LEDE /0xACE7 build $(TZ=UTC-3 date "+%Y.%m.%d") @ OpenWrt /g" package/lean/default-settings/files/zzz-default-settings
+
+#. Change luci list name
+sed -i 's/"Turbo ACC 网络加速"/"网络加速"/g' feeds/luci/applications/luci-app-turboacc/po/zh-cn/turboacc.po
+
 # Change ash to bash
 sed -i 's/ash/bash/g' package/base-files/files/etc/passwd
 
