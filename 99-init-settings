@@ -146,8 +146,8 @@ sed -i 's/127.0.0.1:8888/127.0.0.1:1101/g' /etc/dnscrypt-proxy2/dnscrypt-proxy.t
 #sed -i 's/# proxy/proxy/g' /etc/dnscrypt-proxy2/dnscrypt-proxy.toml
 #sed -i 's/# http_proxy/http_proxy/g' /etc/dnscrypt-proxy2/dnscrypt-proxy.toml
 #sed -i 's/# blocked_names_file/blocked_names_file/g' /etc/dnscrypt-proxy2/dnscrypt-proxy.toml
-/etc/init.d/dnscrypt-proxy disable
-/etc/init.d/dnscrypt-proxy stop
+# /etc/init.d/dnscrypt-proxy disable
+# /etc/init.d/dnscrypt-proxy stop
 
 # crontabs
 echo '* 4 * * 1  wget --no-check-certificate -O /etc/dnsmasq.d/accelerated-domains.china.conf "https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/accelerated-domains.china.conf"' >> /etc/crontabs/root
